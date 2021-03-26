@@ -67,10 +67,10 @@ public class OrderController {//frontend
 	}
 
 	@DeleteMapping("/order/{id}")
-	String DeleteOrder(@PathVariable("id") int deleteId) {
-		System.out.println(deleteId);
-		orderservice.deleteOrder(deleteId);
-		return "Order Deleted";
+	void DeleteOrder(@PathVariable("id") String orderId) {
+		System.out.println(orderId);
+		orderservice.deleteOrder(orderId);
+		
 
 	}
 

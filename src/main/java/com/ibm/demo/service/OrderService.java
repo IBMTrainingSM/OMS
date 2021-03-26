@@ -35,8 +35,8 @@ public void updateOrder(Order order) {
 }
 
 
-public void deleteOrder(int deleteId) {
-	System.out.println("Order Deleted");
+public void deleteOrder(String orderId) {
+	orderRepository.deleteById(orderId);;
 	
 }
 
