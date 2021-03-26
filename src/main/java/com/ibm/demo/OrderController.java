@@ -1,6 +1,7 @@
 package com.ibm.demo;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.demo.entity.Order;
 import com.ibm.demo.service.OrderService;
+
 
 @RestController
 
@@ -46,16 +48,22 @@ public class OrderController {//frontend
 	List<Order> getOrders() {	
 		return orderservice.getOrders();
 	}
+	/**
+	 * 
+	 * @param orderId
+	 * @return
+	 */
 	@GetMapping("/order/{id}")
-	Order getOrders(@PathVariable("id")int orderId) {	
+	Optional<Order> getOrders(@PathVariable("id")String orderId) {	
 		return orderservice.getOrder(orderId);
 	}
 
 	@PutMapping("/order/{id}")
-	void Updateorder(@RequestBody @Valid Order order,BindingResult bindingResult,@PathVariable("id") int orderId) {
+	void Updateorder(@RequestBody @Valid Order order,BindingResult bindingResult,@PathVariable("id") String orderId) {
 		validateModel(bindingResult);
 		System.out.println(orderId);
-		orderservice.updateOrder(orderId);
+		order.setId(orderId);
+		orderservice.updateOrder(order);
 	}
 
 	@DeleteMapping("/order/{id}")

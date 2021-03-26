@@ -3,8 +3,10 @@ package com.ibm.demo.service;
 import com.ibm.demo.entity.Order;
 import com.ibm.demo.repo.OrderRepository;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,15 @@ public String createOrder(Order order)
 
 public List<Order> getOrders()
 {
-  return new ArrayList<Order>();	
+  return orderRepository.findAll();	
  
 }
-public void updateOrder(int orderId) {
-
+    public Optional<Order> getOrder(String orderId) {
+	 return orderRepository.findById(orderId);
+		
+	}
+public void updateOrder(Order order) {
+      orderRepository.save(order);
 }
 
 
@@ -34,9 +40,6 @@ public void deleteOrder(int deleteId) {
 	
 }
 
-public Order getOrder(int orderId) {
- return new Order();
-	
-}
+
 
 }
