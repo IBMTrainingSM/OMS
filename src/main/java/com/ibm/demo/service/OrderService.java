@@ -1,18 +1,22 @@
 package com.ibm.demo.service;
 
 import com.ibm.demo.entity.Order;
+import com.ibm.demo.repo.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {//Spring Beans
-
+@Autowired
+OrderRepository orderRepository;
 public String createOrder(Order order)
 {
-	return "Order Created";
+	Order savedOrder=orderRepository.save(order);
+	return savedOrder.getId();
 }
 
 public List<Order> getOrders()

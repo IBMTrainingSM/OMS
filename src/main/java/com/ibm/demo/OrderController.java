@@ -22,13 +22,13 @@ import com.ibm.demo.service.OrderService;
 
 @RestController
 
-public class OrderController {//frotend
+public class OrderController {//frontend
 	@Autowired
 	OrderService orderservice;//DI
 	@PostMapping("/order")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	String createOrder(@RequestBody @Valid Order order,BindingResult bindingResult) {
-		
+		validateModel(bindingResult);
 		System.out.println(order);
 		return orderservice.createOrder(order);
 	}
